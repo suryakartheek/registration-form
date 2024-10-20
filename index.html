@@ -1,0 +1,157 @@
+!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Student Registration Form</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+    }
+
+    form {
+      width: 500px;
+      margin: 20px auto;
+      padding: 20px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      background-color: #f4f4f4;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 10px;
+      font-weight: bold;
+    }
+
+    input, select, textarea {
+      display: block;
+      width: 100%;
+      margin-bottom: 10px;
+      padding: 8px;
+      border: 1px solid #ccc;
+      border-radius: 30px;
+    }
+
+    button {
+      background-color: blue;
+      color: white;
+      padding: 10px;
+      border: none;
+      cursor: pointer;
+      width: 100%;
+    }
+
+    #result {
+      width: 500px;
+      margin: 20px auto;
+      padding: 20px;
+      background-color: #dff0d8;
+      border: 1px solid #3c763d;
+      display: none;
+    }
+  </style>
+</head>
+<body>
+
+  <h2 style="text-align: center;">Student Registration Form</h2>
+
+  <!-- Comprehensive Registration Form -->
+  <form id="registrationForm">
+    <!-- Basic Information -->
+    <label for="firstName">First Name:</label>
+    <input type="text" id="firstName" name="firstName" required>
+
+    <label for="lastName">Last Name:</label>
+    <input type="text" id="lastName" name="lastName" required>
+
+    <label for="email">Email:</label>
+    <input type="email" id="email" name="email" required>
+
+    <label for="dob">Date of Birth:</label>
+    <input type="date" id="dob" name="dob" required><br>
+
+    <!-- Gender (Radio Buttons) -->
+    <label>Gender:</label>
+    <input type="radio" id="male" name="gender" value="Male" required>
+    <label for="male">Male</label>
+    <input type="radio" id="female" name="gender" value="Female">
+    <label for="female">Female</label><br>
+
+    <!-- Course Selection (Dropdown) -->
+    <label for="course">Course:</label>
+    <select id="course" name="course" required>
+      <option value="">Select a course</option>
+      <option value="Computer Science">Computer Science</option>
+      <option value="Mechanical Engineering">Mechanical Engineering</option>
+      <option value="Business Administration">Business Administration</option>
+      <option value="Psychology">Psychology</option>
+    </select>
+
+    <!-- Skills (Checkboxes) -->
+    <label>Skills:</label>
+    <input type="checkbox" id="skill1" name="skills" value="Programming">
+    <label for="skill1">Programming</label>
+    <input type="checkbox" id="skill2" name="skills" value="Data Analysis">
+    <label for="skill2">Data Analysis</label>
+    <input type="checkbox" id="skill3" name="skills" value="Communication">
+    <label for="skill3">Communication</label><br>
+
+    <!-- File Upload (e.g., Photo Upload) -->
+    <label for="photo">Upload Photo:</label>
+    <input type="file" id="photo" name="photo" accept="image/*">
+
+    <!-- Address (Textarea) -->
+    <label for="address">Address:</label>
+    <textarea id="address" name="address" rows="4" required></textarea><br>
+
+    <button type="submit">Submit</button>
+  </form>
+
+  <!-- This section will display the result after submission -->
+  <div id="result">
+    <h3>Registration Submitted:</h3>
+    <p><strong>First Name:</strong> <span id="displayFirstName"></span></p>
+    <p><strong>Last Name:</strong> <span id="displayLastName"></span></p>
+    <p><strong>Email:</strong> <span id="displayEmail"></span></p>
+    <p><strong>Date of Birth:</strong> <span id="displayDob"></span></p>
+    <p><strong>Gender:</strong> <span id="displayGender"></span></p>
+    <p><strong>Course:</strong> <span id="displayCourse"></span></p>
+    <p><strong>Skills:</strong> <span id="displaySkills"></span></p>
+    <p><strong>Address:</strong> <span id="displayAddress"></span></p>
+  </div>
+
+  <script>
+    document.getElementById("registrationForm").addEventListener("submit", function(event) {
+      event.preventDefault(); // Prevents form from reloading the page
+
+      // Collect data from the form
+      const firstName = document.getElementById("firstName").value;
+      const lastName = document.getElementById("lastName").value;
+      const email = document.getElementById("email").value;
+      const dob = document.getElementById("dob").value;
+      const gender = document.querySelector('input[name="gender"]:checked').value;
+      const course = document.getElementById("course").value;
+      const address = document.getElementById("address").value;
+
+      // Collect checked skills
+      const skillElements = document.querySelectorAll('input[name="skills"]:checked');
+      const skills = Array.from(skillElements).map(skill => skill.value).join(', ');
+
+      // Display the collected data
+      document.getElementById("displayFirstName").textContent = firstName;
+      document.getElementById("displayLastName").textContent = lastName;
+      document.getElementById("displayEmail").textContent = email;
+      document.getElementById("displayDob").textContent = dob;
+      document.getElementById("displayGender").textContent = gender;
+      document.getElementById("displayCourse").textContent = course;
+      document.getElementById("displaySkills").textContent = skills;
+      document.getElementById("displayAddress").textContent = address;
+
+      // Show the result section
+      document.getElementById("result").style.display = "block";
+    });
+  </script>
+
+</body>
+</html>
